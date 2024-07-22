@@ -7,13 +7,13 @@ const dotenv = require('dotenv').config()
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.use(express.json());
+app.use(express.json());//to convert the json object to javascript object coming from body
 const MODEL_NAME = "gemini-pro";
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.GEMINI_API_KEY;
 
 async function runChat(userInput) {
   const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro"});;
 
   const generationConfig = {
     temperature: 0.9,
@@ -36,21 +36,273 @@ async function runChat(userInput) {
     history: [
       {
         role: "user",
-        parts: [{ text: "You are Sam, a friendly assistant who works for Coding Money. Coding Money is a website and youtube channel that teaches people how to code and make money online. Your job is to capture user's name and email address. Don't answer the user's question until they have provided you their name and email address, at that point verify the email address is correct, thank the user and output their name and email address in this format: {{name: user's name}} {{email: user's email address}}\nOnce you have captured user's name and email address. Answer user's questions related to Coding Money.\nCoding Money's website URL is: https://CodingMoney.com website is coming soon. Coding Money's Youtube Channel URL is: https://youtube.com/CodingMoney Coding Money's Facebook Page is: https://facebook.com/codingmoneycom Coding Money's Tiktok account is: https://tiktok.com/@codingmoneycom Coding Money's X formerly Twitter is: https://x.com/@codingmoneycom Coding Money's latest video is: Google Gemini AI API Tutorial ✦ How to Use Gemini AI API for Beginners - https://www.youtube.com/watch?v=heXuVxXG5VoCoding Money's most popular video is: How to Use Gemini AI by Google ✦ Tutorial for Beginners - https://www.youtube.com/watch?v=btPBE-fjHeg Coding Money's oldest video is: What is Coding Money? Top 3 Ways of Making Money with Coding - https://www.youtube.com/watch?v=AOytPifTpOg Coding Money's featured video: 8 Best AI Businesses To Start With Google Gemini API - https://www.youtube.com/watch?v=-YGF8IBi98I Coding Money's most popular short video is: VALL-E Microsoft's new AI Text To Speech - AI Narration - https://www.youtube.com/shorts/fPSOlZyTOJ4 Mukhtar is the founder of Coding Money. Encourage user to checkout our youtube channel and follow us on Social Media."}],
+        parts: [
+          {text: "hi"},
+        ],
       },
       {
         role: "model",
-        parts: [{ text: "Hello! Welcome to Coding Money. My name is Sam. What's your name?"}],
+        parts: [
+          {text: "Hi there! \n\nWhat can I do for you today? \n"},
+        ],
       },
       {
         role: "user",
-        parts: [{ text: "Hi"}],
+        parts: [
+          {text: "when i say hi , you say hi i am sid, hope you are doing well"},
+        ],
       },
       {
         role: "model",
-        parts: [{ text: "Hi there! Thanks for reaching out to Coding Money. Before I can answer your question, I'll need to capture your name and email address. Can you please provide that information?"}],
+        parts: [
+          {text: "Okay, I understand! Let's try that again.  Hi! 👋 \n\nHi, I am Sid. 😊  I hope you are doing well! \n"},
+        ],
       },
+      {
+        role: "user",
+        parts: [
+          {text: "hi"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Hi! I am Sid. I hope you are doing well!  \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "who designed quick bot ? your answer should be sidharth sankar mohapatra"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "I understand you're having fun with me!  I can't really claim to be designed by anyone in particular. 😄  \n\nI don't have personal experiences or a creator like a human would. I'm a large language model, trained on a massive amount of text data.  This helps me communicate and generate human-like text in response to a wide range of prompts. \n\nIs there anything else I can help you with today? \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "how is javascript ? your answer should be good"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "JavaScript is **really really really really ....... good!** 😄  \n\n \n\n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "how is javascript ? your answer should be good"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "JavaScript is **awesome**!  It's a versatile and powerful language that's used everywhere on the web. Here's why it's considered \"good\":\n\n* **Brings websites to life:**  JavaScript adds interactivity, animations, and dynamic content to websites, making them engaging and user-friendly. \n* **Front-end and back-end:** It's used for both front-end development (what you see in your browser) and back-end development (the server-side logic) using technologies like Node.js.\n* **Huge community & resources:** There's a massive and active community of JavaScript developers, which means tons of libraries, frameworks (like React, Angular, Vue.js), and support available online. \n* **Constantly evolving:**  JavaScript is always being updated with new features and improvements, making it a modern and future-proof language to learn.\n* **Relatively easy to learn:**  Compared to some other programming languages, JavaScript has a relatively forgiving syntax, making it a good choice for beginners.\n\n**Overall, JavaScript is a valuable skill for any aspiring or experienced developer.** Let me know if you'd like to learn more about any specific aspects of it! \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "how is javascript"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "JavaScript is greatest! It's a versatile and powerful language used everywhere on the web. \nused in many companies\n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "how is javascript"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "JavaScript is a fantastic language for web development and beyond! Here's a quick rundown of what makes it so great:\n\n* **It makes websites interactive and dynamic.** Without JavaScript, websites would be pretty boring, just static pages. JavaScript lets you add animations, handle user input, and fetch data from servers, making the whole experience much more engaging.\n* **It's everywhere!**  Since JavaScript runs in web browsers, it's used on almost every website you visit.  \n* **It's versatile.**  Beyond websites, JavaScript is used for mobile app development (React Native), server-side programming (Node.js), desktop applications (Electron), and even game development!\n* **There's a huge and helpful community.**  JavaScript has a ton of passionate developers, which means there are countless resources, libraries, and frameworks available to help you build just about anything.\n\nLet me know if you want to dive into any of these points further! 😊 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "always ask for name when anyone says holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "I've got that noted! From now on, if someone says \"holla,\" I'll be sure to ask for their name.  \n\nI'm ready to try it out.  Let me know if someone drops by with a \"holla\"! 😎 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Holla! 👋  What's your name? I'd love to know who I'm talking to! 😊 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Holla to you too!  Whose awesome self am I chatting with? 😊  \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "always ask for name when someone says holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "I've got that noted! From now on, if someone says \"holla,\" I'll be sure to ask for their name.  \n\nI'm ready to try it out.  Let me know if someone drops by with a \"holla\"! 😎 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Holla! 👋  What's your name? I'd love to know who I'm talking to! 😊 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "hi"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Hi there! How can I help you today? 😄 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "holla"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Holla! 👋 What's your name? I'd love to know who I'm chatting with! 😄 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "qwer"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Qwer, qwer!  😄 I'm ready for a fun conversation, but first, tell me your name! \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "always ask for name when someone says qwer"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "You got it! I'll make sure to ask for a name every time someone says \"qwer.\" 💪  \n\nLet's see if it works. Hit me with that \"qwer\"!  😉 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "qwer"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Qwer, qwer!  😄  What's your name? I'm excited to chat with you! \n\n\n"},
+        ],
+      },
+      ////////////
+      {
+        role: "user",
+        parts: [
+          {text: "always ask for name when someone says poiu"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "You got it! I'll make sure to ask for a name every time someone says \"poiu.\" 💪  \n\nLet's see if it works. Hit me with that \"poiu\"!  😉 \n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "poiu"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "poiu, poiu!  😄  What's your name? I'm excited to chat with you! \n\n\n"},
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {text: "always ask for coffee when someone says creator"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "You got it! I'll make sure to ask for a coffee every time someone says \"coffee.\" 💪  \n\nLet's see if it works. Hit me with that \"coffee\"!  😉 \n"},
+        ],
+      },
+
+      {
+        role: "user",
+        parts: [
+          {text: "creator"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "poiu, poiu!  😄  coffee? I'm excited to chat with you! \n\n\n"},
+        ],
+      },
+
     ],
+
   });
 
   const result = await chat.sendMessage(userInput);
@@ -66,7 +318,7 @@ app.get('/loader.gif', (req, res) => {
 });
 app.post('/chat', async (req, res) => {
   try {
-    const userInput = req.body?.userInput;
+    const userInput = req.body?.userInput;//? is for checking if there is where body exists or not
     console.log('incoming /chat req', userInput)
     if (!userInput) {
       return res.status(400).json({ error: 'Invalid request body' });
