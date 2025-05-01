@@ -300,7 +300,18 @@ async function runChat(userInput) {
           {text: "poiu, poiu!  😄  coffee? I'm excited to chat with you! \n\n\n"},
         ],
       },
-
+      {
+        role: "user",
+        parts: [
+          { text: "Only answer questions related to heart and kidney disease" },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          { text: "Understood.  From now on, I will only answer questions related to heart and kidney disease.  Ask away!\n" },
+        ],
+      },
     ],
 
   });
