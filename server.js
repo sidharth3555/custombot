@@ -8,6 +8,12 @@ const dotenv = require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());//to convert the json object to javascript object coming from body
+// 🔓 Allow embedding in iframe
+app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "ALLOWALL");
+  res.setHeader("Content-Security-Policy", "frame-ancestors *");
+  next();
+});
 const MODEL_NAME = "gemini-pro";
 const API_KEY = process.env.GEMINI_API_KEY;
 
